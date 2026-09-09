@@ -592,3 +592,14 @@ button:focus-visible {
     font-size: 1.05rem;
   }
 }
+
+
+.cover-image {
+  width: min(240px, 75%);
+  height: auto;
+  border-radius: 6px 12px 12px 6px;
+  box-shadow:
+    4px 8px 24px rgba(28, 25, 23, 0.18),
+    inset -6px 0 12px rgba(0, 0, 0, 0.06);
+  display: block;
+}
