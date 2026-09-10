@@ -737,11 +737,14 @@ button:focus-visible {
   }
 }
 
-/* Property Sage app icon on card */
-.card--app .app-icon {
-  width: 72px;
-  height: 72px;
-  border-radius: 16px;
+/* Property Sage Play Store feature graphic on card */
+.card--app .app-icon,
+.card--app .app-icon--feature {
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  border-radius: 12px;
   box-shadow: 0 6px 18px rgba(28, 25, 23, 0.12);
-  margin-bottom: 0.25rem;
+  margin-bottom: 0.35rem;
+  object-fit: cover;
 }
