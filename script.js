@@ -43,8 +43,7 @@
   onScroll();
   window.addEventListener("scroll", onScroll, { passive: true });
 
-  // Highlight current section in nav when possible
-  var sections = ["about", "work", "book", "contact"]
+  var sections = ["about", "path", "work", "projects", "book", "contact"]
     .map(function (id) {
       return document.getElementById(id);
     })
@@ -68,5 +67,52 @@
     sections.forEach(function (section) {
       observer.observe(section);
     });
+  }
+
+  // Horizontal scroll panels (scroll-linked), same idea as devindurrant.com
+  var scrollers = document.querySelectorAll(".horizontal-scroll-scroller");
+  if (scrollers.length && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    function updateScroller(scroller, track) {
+      var vh = window.innerHeight;
+      var scrollY = window.scrollY;
+      var rect = scroller.getBoundingClientRect();
+      var top = rect.top + scrollY;
+      var h = scroller.offsetHeight;
+      var range = Math.max(1, h - vh);
+      var p = (scrollY - top) / range;
+      p = Math.min(1, Math.max(0, p));
+      var maxX = Math.max(0, track.scrollWidth - window.innerWidth);
+      track.style.transform = "translate3d(" + -p * maxX + "px, 0, 0)";
+    }
+
+    var pairs = [];
+    scrollers.forEach(function (scroller) {
+      var track = scroller.querySelector("[data-horizontal-track]");
+      if (track) pairs.push({ scroller: scroller, track: track });
+    });
+
+    var raf = 0;
+    function tick() {
+      raf = 0;
+      pairs.forEach(function (pair) {
+        updateScroller(pair.scroller, pair.track);
+      });
+    }
+
+    function schedule() {
+      if (!raf) raf = requestAnimationFrame(tick);
+    }
+
+    if ("ResizeObserver" in window) {
+      var ro = new ResizeObserver(schedule);
+      pairs.forEach(function (pair) {
+        ro.observe(pair.scroller);
+        ro.observe(pair.track);
+      });
+    }
+
+    window.addEventListener("scroll", schedule, { passive: true });
+    window.addEventListener("resize", schedule);
+    schedule();
   }
 })();
