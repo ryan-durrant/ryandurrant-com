@@ -125,8 +125,9 @@
   }
 
   .horizontal-panel__title {
-    font-size: clamp(2rem, 11vw, 2.75rem);
-    overflow-wrap: anywhere;
+    font-size: clamp(1.85rem, 9vw, 2.5rem);
+    overflow-wrap: normal;
+    word-break: normal;
   }
 }
 
