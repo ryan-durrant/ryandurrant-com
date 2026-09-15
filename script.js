@@ -69,9 +69,11 @@
     });
   }
 
-  // Horizontal scroll panels (scroll-linked), same idea as devindurrant.com
+  // Horizontal scroll panels (scroll-linked); stacked on small screens via CSS
   var scrollers = document.querySelectorAll(".horizontal-scroll-scroller");
-  if (scrollers.length && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+  var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+  var stackPath = window.matchMedia("(max-width: 640px)");
+  if (scrollers.length && !reduceMotion.matches && !stackPath.matches) {
     function updateScroller(scroller, track) {
       var vh = window.innerHeight;
       var scrollY = window.scrollY;
