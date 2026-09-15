@@ -95,6 +95,39 @@
   .horizontal-section__hint {
     display: none;
   }
+
+  .horizontal-scroll-scroller {
+    height: auto;
+  }
+
+  .horizontal-scroll-sticky {
+    position: relative;
+    height: auto;
+    overflow: visible;
+  }
+
+  .horizontal-section__track {
+    flex-direction: column;
+    width: 100%;
+    transform: none !important;
+  }
+
+  .horizontal-panel {
+    width: 100%;
+    flex-basis: auto;
+    padding: 2.75rem var(--space);
+    justify-content: flex-start;
+  }
+
+  .horizontal-panel__inner {
+    max-width: none;
+    width: 100%;
+  }
+
+  .horizontal-panel__title {
+    font-size: clamp(2rem, 11vw, 2.75rem);
+    overflow-wrap: anywhere;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
