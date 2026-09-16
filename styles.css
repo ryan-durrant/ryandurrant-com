@@ -2,6 +2,7 @@
    Clean modern theme: cool slate, teal accent */
 
 :root {
+  color-scheme: light;
   --bg: #eef2f6;
   --bg-elevated: #ffffff;
   --bg-soft: #f7f9fb;
@@ -11,15 +12,64 @@
   --accent: #0f766e;
   --accent-deep: #115e59;
   --accent-bright: #14b8a6;
+  --accent-hover: #115e59;
   --accent-soft: rgba(15, 118, 110, 0.1);
-  --radius: 10px;
+  --btn-on-accent: #f0fdfa;
+  --glass: #ffffff;
+  --glow: rgba(20, 184, 166, 0.14);
+  --glow-mid: rgba(15, 118, 110, 0.08);
+  --glow-strong: rgba(20, 184, 166, 0.22);
+  --hero-wash-0: rgba(238, 242, 246, 0.92);
+  --hero-wash-1: rgba(238, 242, 246, 0.72);
+  --hero-wash-2: rgba(238, 242, 246, 0.35);
+  --stripe: rgba(15, 118, 110, 0.035);
+  --page-top: #f5f8fb;
+  --page-bottom: #e8eef4;
   --shadow: 0 1px 0 rgba(11, 18, 32, 0.04);
+  --shadow-cover:
+    0 20px 48px rgba(11, 18, 32, 0.16),
+    0 4px 12px rgba(11, 18, 32, 0.08);
+  --shadow-nav: 0 12px 32px rgba(11, 18, 32, 0.08);
+  --radius: 10px;
   --font-sans: "DM Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
   --font-display: "Syne", system-ui, sans-serif;
   --space: clamp(1rem, 3vw, 1.5rem);
   --wrap: min(1100px, calc(100% - 2 * var(--space)));
   --header-h: 4rem;
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+    --bg: #0c1219;
+    --bg-elevated: #151c26;
+    --bg-soft: #111820;
+    --ink: #e8eef6;
+    --ink-muted: #9aa8bb;
+    --line: #2a3544;
+    --accent: #2dd4bf;
+    --accent-deep: #5eead4;
+    --accent-bright: #5eead4;
+    --accent-hover: #14b8a6;
+    --accent-soft: rgba(45, 212, 191, 0.14);
+    --btn-on-accent: #042f2e;
+    --glass: #e8eef6;
+    --glow: rgba(45, 212, 191, 0.16);
+    --glow-mid: rgba(20, 184, 166, 0.1);
+    --glow-strong: rgba(45, 212, 191, 0.22);
+    --hero-wash-0: rgba(12, 18, 25, 0.92);
+    --hero-wash-1: rgba(12, 18, 25, 0.78);
+    --hero-wash-2: rgba(12, 18, 25, 0.4);
+    --stripe: rgba(45, 212, 191, 0.06);
+    --page-top: #101820;
+    --page-bottom: #0a1016;
+    --shadow: 0 1px 0 rgba(0, 0, 0, 0.4);
+    --shadow-cover:
+      0 20px 48px rgba(0, 0, 0, 0.45),
+      0 4px 12px rgba(0, 0, 0, 0.3);
+    --shadow-nav: 0 12px 32px rgba(0, 0, 0, 0.4);
+  }
 }
 
 *,
@@ -53,9 +103,9 @@ body {
   line-height: 1.65;
   color: var(--ink);
   background:
-    radial-gradient(ellipse 90% 55% at 85% -5%, rgba(20, 184, 166, 0.14), transparent 55%),
-    radial-gradient(ellipse 70% 45% at -5% 15%, rgba(15, 118, 110, 0.08), transparent 50%),
-    linear-gradient(180deg, #f5f8fb 0%, var(--bg) 40%, #e8eef4 100%);
+    radial-gradient(ellipse 90% 55% at 85% -5%, var(--glow), transparent 55%),
+    radial-gradient(ellipse 70% 45% at -5% 15%, var(--glow-mid), transparent 50%),
+    linear-gradient(180deg, var(--page-top) 0%, var(--bg) 40%, var(--page-bottom) 100%);
   background-attachment: fixed;
   -webkit-font-smoothing: antialiased;
 }
@@ -88,7 +138,7 @@ button:focus-visible {
   z-index: 1000;
   padding: 0.6rem 1rem;
   background: var(--ink);
-  color: #fff;
+  color: var(--bg);
   border-radius: 8px;
   text-decoration: none;
   font-weight: 600;
@@ -215,14 +265,14 @@ button:focus-visible {
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(105deg, rgba(238, 242, 246, 0.92) 0%, rgba(238, 242, 246, 0.72) 42%, rgba(238, 242, 246, 0.35) 100%),
-    radial-gradient(ellipse 60% 80% at 78% 45%, rgba(20, 184, 166, 0.22), transparent 60%),
+    linear-gradient(105deg, var(--hero-wash-0) 0%, var(--hero-wash-1) 42%, var(--hero-wash-2) 100%),
+    radial-gradient(ellipse 60% 80% at 78% 45%, var(--glow-strong), transparent 60%),
     repeating-linear-gradient(
       -12deg,
       transparent,
       transparent 48px,
-      rgba(15, 118, 110, 0.035) 48px,
-      rgba(15, 118, 110, 0.035) 49px
+      var(--stripe) 48px,
+      var(--stripe) 49px
     );
   pointer-events: none;
   z-index: 0;
@@ -335,14 +385,14 @@ button:focus-visible {
 
 .btn-primary {
   background: var(--accent);
-  color: #f0fdfa;
+  color: var(--btn-on-accent);
   border-color: var(--accent);
 }
 
 .btn-primary:hover {
-  background: var(--accent-deep);
-  border-color: var(--accent-deep);
-  color: #f0fdfa;
+  background: var(--accent-hover);
+  border-color: var(--accent-hover);
+  color: var(--btn-on-accent);
 }
 
 .btn-ghost {
@@ -509,7 +559,7 @@ button:focus-visible {
 /* Book */
 .book {
   background:
-    radial-gradient(ellipse 50% 60% at 90% 50%, rgba(20, 184, 166, 0.12), transparent 65%),
+    radial-gradient(ellipse 50% 60% at 90% 50%, var(--glow), transparent 65%),
     var(--bg-soft);
   border-top: 1px solid var(--line);
   border-bottom: 1px solid var(--line);
@@ -559,9 +609,7 @@ button:focus-visible {
   width: min(240px, 75%);
   height: auto;
   border-radius: 4px;
-  box-shadow:
-    0 20px 48px rgba(11, 18, 32, 0.16),
-    0 4px 12px rgba(11, 18, 32, 0.08);
+  box-shadow: var(--shadow-cover);
   display: block;
   transition: transform 0.4s var(--ease);
 }
@@ -643,7 +691,7 @@ button:focus-visible {
     opacity: 0;
     pointer-events: none;
     transition: transform 0.25s var(--ease), opacity 0.25s var(--ease);
-    box-shadow: 0 12px 32px rgba(11, 18, 32, 0.08);
+    box-shadow: var(--shadow-nav);
   }
 
   .site-nav.is-open {
@@ -695,7 +743,7 @@ button:focus-visible {
   display: flex;
   flex-direction: column;
   background:
-    radial-gradient(ellipse 50% 40% at 50% 30%, rgba(20, 184, 166, 0.1), transparent 70%),
+    radial-gradient(ellipse 50% 40% at 50% 30%, var(--glow), transparent 70%),
     var(--bg-elevated);
 }
 
