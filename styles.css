@@ -337,9 +337,13 @@ button:focus-visible {
   animation: fade-scale 1s var(--ease) 0.2s both;
 }
 
-.hero-skyline {
-  width: min(360px, 85vw);
+.hero-portrait {
+  width: min(320px, 78vw);
   height: auto;
+  display: block;
+  border-radius: calc(var(--radius) + 4px);
+  box-shadow: var(--shadow-cover);
+  border: 1px solid var(--line);
 }
 
 @keyframes rise-in {
